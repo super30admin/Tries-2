@@ -1,4 +1,4 @@
-#time: O(NM)
+#time: O(m+k)*n, N is number of queries. K is len of each query and m is length of pattern
 #Space: O(1)
 
 class Solution:
