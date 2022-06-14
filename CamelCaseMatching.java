@@ -1,4 +1,4 @@
-//Time Complexity O(M*N)query
+//Time Complexity O(M*N)query M pattern N
 //Space Complexity O(1) constant array of size 26
 //Leetcode tested
 
