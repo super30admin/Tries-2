@@ -1,0 +1,92 @@
+#Camelcase Matching
+#tc: O(n)
+#sc: O(1)
+class Solution:
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        
+        ans = []
+        
+        for i in queries:
+            
+            j = 0
+            k = 0
+            
+            if len(pattern) > len(i):
+                ans.append(False)
+                continue
+            
+            while j < len(i):
+                if k < len(pattern) and i[j] == pattern[k]:
+                    j += 1
+                    k += 1
+                elif i[j].islower():
+                    j += 1
+                else:
+                    break
+            
+            if j >= len(i) and k >= len(pattern):
+                ans.append(True)
+            else:
+                ans.append(False)
+        
+        return ans
+#Top K Frequent Elements
+#tc:O(n)
+#sc:O(n)
+class Solution:
+	def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+		frequency = {}
+
+		for num in nums:
+
+			if num not in frequency:
+
+				frequency[num] = 1
+
+			else:
+
+				frequency[num] = frequency[num] + 1
+
+		frequency = dict(sorted(frequency.items(), key=lambda x: x[1], reverse=True))
+
+		result = list(frequency.keys())[:k]
+
+		return result
+#Word Squares
+#tc: O(mn)
+#sc: O(1)
+class Solution:
+    def wordSquares(self, words: List[str]) -> List[List[str]]:
+        trie = {}
+        for word in words:
+            node = trie
+            for c in word:
+                if c not in node:
+                    node[c] = {}
+                node = node[c]
+            node['#'] = word
+        ans, n = [], len(words[0])
+        up, w = [trie for _ in range(n)], []
+        def backtrack(i, j, left):
+            if '#' in left:
+                w.append(left['#'])
+                if len(w) == n:
+                    ans.append(w[:])
+                else:
+                    backtrack(i+1, i+1, up[i+1])
+                w.pop()
+                return
+            
+            for nc, next_left in left.items():
+                if nc not in up[j]:
+                    continue
+                
+                prev_up = up[j]
+                up[j] = up[j][nc]
+                backtrack(i, j+1, next_left)
+                up[j] = prev_up
+        
+        backtrack(0, 0, trie)
+        
+        return ans
