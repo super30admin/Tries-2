@@ -1,5 +1,5 @@
-#Time: 
-#Space: 
+#Time: O(n)
+#Space: O(n)
 #Program ran on leetcode successfully
 
 import heapq
