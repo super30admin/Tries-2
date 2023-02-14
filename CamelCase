@@ -1,0 +1,29 @@
+//TimeComplexity    nk
+//SpaceComplexity. O(1)
+
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        
+        List<Boolean> result = new ArrayList<>();
+       
+        for(String s :  queries){
+            int p1 = 0;
+             boolean flag = false;
+            for(int i = 0 ; i < s.length(); i++){
+                
+                if(p1 < pattern.length() && pattern.charAt(p1) == s.charAt(i)){
+                    p1++;
+                    if(p1 == pattern.length())flag = true;
+            
+                }else if(Character.isUpperCase(s.charAt(i))){
+                flag = false;
+                break;
+                }
+                
+            }
+            result.add(flag);
+            
+        }
+        return result;
+    }
+}
