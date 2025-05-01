@@ -1,0 +1,34 @@
+// Time Complexity :O(N*l) number of queries and l is the avergae length of queri
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:Two pointers approach 
+
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> result = new ArrayList<>();
+        for (int i = 0; i < queries.length; i++) {
+            boolean flag = checkMathcing(queries[i], pattern);//whether query and pattern matches
+            result.add(flag);
+        }
+        return result;
+    }
+
+    public boolean checkMathcing(String source, String pattern) {
+        int pl = pattern.length();
+        int i = 0;
+        int j = 0;
+        boolean flag=false;
+        while (i < source.length()) {//till source reaches end
+            if (j < pl && source.charAt(i) == pattern.charAt(j)) {//if both matches and pattern not reaches end
+                j++;
+                if(j == pl) flag=true;//once pattern reaches end 
+            }else if(Character.isUpperCase(source.charAt(i))){//if botha re not equal but source has uppercase
+                flag=false;
+                break;
+            }
+             i++;
+        }
+        return flag;
+    }
+}
